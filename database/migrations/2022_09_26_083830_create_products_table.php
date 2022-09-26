@@ -24,6 +24,7 @@ return new class extends Migration
 			$table->integer('stock');
 			$table->string('descripción');
 			$table->timestamps();
+            $table->softDeletes();
 
 
 			$table->foreign('user_id')
