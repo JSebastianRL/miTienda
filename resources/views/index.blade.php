@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>hola asdasd a</h1>
-    <h3>creo que ya todo funca
+@extends('layouts.app')
 
-    </h3>
-</body>
-</html>
+@section('content')
+    <h1>Holi</h1>
+    <h2>asdasd</h2>
+@endsection

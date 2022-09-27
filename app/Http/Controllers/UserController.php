@@ -7,21 +7,33 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function showUserTable()
+    {
+        return view('users.table');
+    }
     public function getAllUsers()
     {
-        $user = User::get();
-        return response()->json(['users' => $user], 200);
+        $users = User::get();
+        return response()->json(['users' => $users], 200);
     }
-    public function getUserById()
+    public function getUserById(User $user)
     {
+        return response()->json(['user' => $user], 200);
     }
-    public function SaveUser()
+    public function saveUser(Request $request)
     {
+        $user = new User($request->all());
+        $user->save();
+        return response()->json(['newUser' => $user], 201);
     }
-    public function UpdateUser()
+    public function updateUser(User $user, Request $request)
     {
+        $user->update($request->all());
+        return response()->json(['newUser' => $user->refresh()], 201);
     }
-    public function DeleteUser()
+    public function deleteUser(User $user)
     {
+        $user->delete();
+        return response()->json([], 204);
     }
 }
