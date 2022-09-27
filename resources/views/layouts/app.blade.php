@@ -66,7 +66,10 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('show.user.table') }}">
-                                        Users
+                                        Usuarios
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('show.product.table') }}">
+                                        Prodcutos
                                     </a>
                                     <a class="dropdown-item" href="{{ route('home') }}">
                                         Home

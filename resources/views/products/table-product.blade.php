@@ -4,8 +4,8 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h1 class="text-center">Usuarios</h1>
-                <a href="{{route('show.create.user')}}" class="btn btn-success">Crear nuevo producto</a>
+                <h1 class="text-center">Prodcutos</h1>
+                <a href="{{route('show.create.product')}}" class="btn btn-success">Crear nuevo producto</a>
             </div>
             <div class="card-body">
                 <section class="table-responsive">
@@ -13,19 +13,23 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Id Categoria</th>
                                 <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Roll</th>
-                                <th>Acciones</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Descripcion</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($products as $product)
                                 <tr>
-                                    <td>{{$user->id}}</td>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->name}}</td>
+                                    <td>{{$product->id}}</td>
+                                    <td>{{$product->category_id}}</td>
+                                    <td>{{$product->nombre}}</td>
+                                    <td>{{$product->precio}}</td>
+                                    <td>{{$product->stock}}</td>
+                                    <td>{{$product->descripcion}}</td>
                                     <td>
                                         <div class="d-flex justify-content-start">
                                             <button class="btn btn-warning me-2">Editar</button>

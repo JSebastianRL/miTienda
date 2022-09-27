@@ -15,22 +15,22 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
 			$table->id();
-			$table->bigInteger('user_id')->unsigned();
+			//$table->bigInteger('user_id')->unsigned();
 			$table->bigInteger('category_id')->unsigned();
 			$table->string('nombre');
-			$table->string('url');
-			$table->morphs('img');
+			// $table->string('url');
+			// $table->morphs('img');
 			$table->integer('precio');
-			$table->integer('stock');
-			$table->string('descripción');
+			$table->string('stock');
+			$table->string('descripcion');
 			$table->timestamps();
             $table->softDeletes();
 
 
-			$table->foreign('user_id')
-				->references('id')
-				->on('users')
-				->onDelete('cascade');
+			// $table->foreign('user_id')
+			// 	->references('id')
+			// 	->on('users')
+			// 	->onDelete('cascade');
 
 			$table->foreign('category_id')
 				->references('id')
