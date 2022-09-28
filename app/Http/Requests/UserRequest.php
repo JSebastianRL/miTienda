@@ -14,8 +14,18 @@ class UserRequest extends FormRequest
 
     public function rules()
     {
-        return [
-            'name'=> ['required','string']
+        $rules = [
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email'],
         ];
+
+        //creacion
+        if ($this->method('POST')) {
+            $rules['password'] = ['required', 'string', 'min:6', 'confirmed'];
+        } else {
+            //edicion
+            $rules['password'] = ['confirmed'];
+        }
+        return $rules;
     }
 }

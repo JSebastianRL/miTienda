@@ -23,5 +23,5 @@
         <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ isset($product) ? $product->descripcion : '' }}">
     </div>
     <div class="mb-3">
-        <input type="submit" value="Actualizar Usuario" class="btn btn-success">
+        <input type="submit" value="Enviar" class="btn btn-success">
     </div>

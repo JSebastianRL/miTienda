@@ -12,5 +12,9 @@
             <input type="password" class="form-control" id="password" name="password">
         </div>
         <div class="mb-3">
-            <input type="submit" value="Actualizar Usuario" class="btn btn-success">
+            <label for="password" class="form-label">confirmar contraseña</label>
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+        </div>
+        <div class="mb-3">
+            <input type="submit" value="Enviar" class="btn btn-success">
         </div>

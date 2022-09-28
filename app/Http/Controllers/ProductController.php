@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProdcutRequest;
 
 class ProductController extends Controller
 {
     public function showProductTable()
     {
-
         $products = $this->getAllProducts()->original['products'];
         return view('products.table-product', compact('products'));
     }
@@ -33,7 +33,7 @@ class ProductController extends Controller
     {
         return response()->json(['product' => $product], 200);
     }
-    public function saveProduct(Request $request)
+    public function saveProduct(ProdcutRequest $request)
     {
         $product = new Product($request->all());
         $product->save();
@@ -42,7 +42,7 @@ class ProductController extends Controller
         }
         return back()->with('success', 'Producto creado');
     }
-    public function updateProduct(Product $product, Request $request)
+    public function updateProduct(Product $product, ProdcutRequest $request)
     {
         $allRequest = $request->all();
         if (!$allRequest) unset($allRequest); {

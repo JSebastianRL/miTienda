@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -29,7 +30,7 @@ class UserController extends Controller
     {
         return response()->json(['user' => $user], 200);
     }
-    public function saveUser(Request $request)
+    public function saveUser(UserRequest $request)
     {
         $user = new User($request->all());
         $user->save();
@@ -38,7 +39,7 @@ class UserController extends Controller
         }
         return back()->with('success', 'Usuario creado');
     }
-    public function updateUser(User $user, Request $request)
+    public function updateUser(User $user, UserRequest $request)
     {
         $allRequest = $request->all();
         if (!$allRequest['password']) unset($allRequest['password']); {
@@ -49,7 +50,7 @@ class UserController extends Controller
         }
         return back()->with('success', 'Usuario Actualizado');
     }
-    public function deleteUser(User $user, Request $request)
+    public function deleteUser( $user, Request $request)
     {
         $user->delete();
         if ($request->ajax()) {

@@ -14,8 +14,20 @@ class ProdcutRequest extends FormRequest
 
     public function rules()
     {
-        return [
-            //
+        $rules = [
+            'nombre' => ['required', 'string'],
+            'precio' => ['required', 'integer'],
+            'stock' => ['required', 'string'],
+            'descripcion' => ['required', 'string', 'max:60'],
         ];
+
+        //creacion
+        if ($this->method('POST')) {
+            $rules['category_id'] = ['required', 'integer'];
+        } else {
+            //edicion
+
+        }
+        return $rules;
     }
 }
