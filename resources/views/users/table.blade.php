@@ -3,6 +3,9 @@
 @section('content')
     <div class="container">
         @include('layouts.alerts')
+
+        {{-- <div class="container">
+        @include('layouts.alerts')
         <div class="card">
             <div class="card-header">
                 <h1 class="text-center">Usuarios</h1>
@@ -45,5 +48,7 @@
                 </section>
             </div>
         </div>
-    </div>
+    </div> --}}
+    <table-user :users="{{$users}}"></table-user>
+
 @endsection

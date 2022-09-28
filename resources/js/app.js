@@ -1,9 +1,14 @@
 import "./bootstrap";
 import { createApp } from "vue";
+import TableUser from './components/Users/TableUser.vue'
 
-const app = createApp({});
+const app = createApp({
+    components:{
+        TableUser
+    }
+});
 
-import ExampleComponent from "./components/ExampleComponent.vue";
-app.component("example-component", ExampleComponent);
-pp.mount("#app");
- b
+
+app.mount("#app");
+
+
