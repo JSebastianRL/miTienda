@@ -5,13 +5,14 @@
         @include('layouts.alerts')
         <div class="card">
             <div class="card-header">
-                <h1 class="text-center">Usuarios</h1>
+                <h1 class="text-center">Editar Usuarios</h1>
                 <a href="{{ route('show.user.table') }}" class="btn btn-primary">Atras</a>
             </div>
             <div class="card-body">
-                <form action="{{ route('create.user') }}" method="POST">
+                <form action="{{ route('update.user', ['user' => $user->id]) }}" method="POST">
                     @csrf
-                    @include('layouts.user.form-user', ['type'=> 'create'])
+                    @method('PUT')
+                    @include('layouts.user.form-user')
                 </form>
             </div>
         </div>

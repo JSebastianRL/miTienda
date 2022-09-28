@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -17,6 +18,11 @@ class ProductController extends Controller
     {
         $categories = Category::get();
         return view('products.create-product', compact('categories'));
+    }
+    public function showUpdateProducts(Product $product)
+    {
+        $categories = Category::get();
+        return view('products.update-product', compact('product', 'categories'));
     }
     public function getAllProducts()
     {
@@ -38,13 +44,22 @@ class ProductController extends Controller
     }
     public function updateProduct(Product $product, Request $request)
     {
-        $product->update($request->all());
-        return response()->json(['newProduct' => $product->refresh()], 201);
+        $allRequest = $request->all();
+        if (!$allRequest) unset($allRequest); {
+        }
+        $product->update($allRequest);
+        if ($request->ajax()) {
+            return response()->json(['updateProduct' => $product->refresh()], 201);
+        }
+        return back()->with('success', 'Producto Actualizado');
     }
-    public function deleteProduct(Product $product)
+    public function deleteProduct(Product $product, Request $request)
     {
         $product->delete();
-        return response()->json([], 204);
+        if ($request->ajax()) {
+            return response()->json([], 204);
+        }
+        return back()->with('success', 'Producto Eliminado');
     }
-//
+    //
 }

@@ -12,22 +12,26 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-	use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
 
-	protected $fillable = [
-		'name',
-		'email',
-		'password',
-	];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
-	protected $hidden = [
-		'password'
-	];
+    protected $hidden = [
+        'password'
+    ];
+    //Mutador -> ingreso de registro a base de datos
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password']= bcrypt($value) ;
+    }
 
-
-	public function Products()
-	{
-		return $this->hasMany(Product::class, 'user_id', 'id');
-	}
+    public function Products()
+    {
+        return $this->hasMany(Product::class, 'user_id', 'id');
+    }
 }

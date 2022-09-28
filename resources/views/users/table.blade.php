@@ -2,10 +2,11 @@
 
 @section('content')
     <div class="container">
+        @include('layouts.alerts')
         <div class="card">
             <div class="card-header">
                 <h1 class="text-center">Usuarios</h1>
-                <a href="{{route('show.create.user')}}" class="btn btn-success">Crear nuevo producto</a>
+                <a href="{{ route('show.create.user') }}" class="btn btn-success">Crear nuevo Usuario</a>
             </div>
             <div class="card-body">
                 <section class="table-responsive">
@@ -22,14 +23,19 @@
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{$user->id}}</td>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->name}}</td>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-start">
-                                            <button class="btn btn-warning me-2">Editar</button>
-                                            <button class="btn btn-danger">Elminar</button>
+                                            <a href="{{ route('show.update.user', ['user' => $user->id]) }}"
+                                                class="btn btn-warning me-2">Editar</a>
+                                            <form action="{{ route('delete.user', ['user' => $user->id]) }}"method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger" type="submit">Elminar</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

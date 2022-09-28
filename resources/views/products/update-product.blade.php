@@ -5,13 +5,14 @@
         @include('layouts.alerts')
         <div class="card">
             <div class="card-header">
-                <h1 class="text-center">Productos</h1>
+                <h1 class="text-center">Editar Productos</h1>
                 <a href="{{ route('show.product.table') }}" class="btn btn-primary">Atras</a>
             </div>
             <div class="card-body">
-                <form action="{{route('create.product')}}" method="POST">
+                <form action="{{ route('update.product', ['product' => $product->id]) }}" method="POST">
                     @csrf
-                    @include('layouts.product.form-product', ['type'=> 'create'])
+                    @method('PUT')
+                    @include('layouts.product.form-product')
                 </form>
             </div>
         </div>

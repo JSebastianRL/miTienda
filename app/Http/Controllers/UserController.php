@@ -16,6 +16,10 @@ class UserController extends Controller
     {
         return view('users.create-user');
     }
+    public function showUpdateUser(User $user)
+    {
+        return view('users.update-user', compact('user'));
+    }
     public function getAllUsers()
     {
         $users = User::get();
@@ -32,16 +36,25 @@ class UserController extends Controller
         if ($request->ajax()) {
             return response()->json(['newUser' => $user], 201);
         }
-        return back()->with('success','Usuario creado');
+        return back()->with('success', 'Usuario creado');
     }
     public function updateUser(User $user, Request $request)
     {
-        $user->update($request->all());
-        return response()->json(['newUser' => $user->refresh()], 201);
+        $allRequest = $request->all();
+        if (!$allRequest['password']) unset($allRequest['password']); {
+        }
+        $user->update($allRequest);
+        if ($request->ajax()) {
+            return response()->json(['updateUser' => $user->refresh()], 201);
+        }
+        return back()->with('success', 'Usuario Actualizado');
     }
-    public function deleteUser(User $user)
+    public function deleteUser(User $user, Request $request)
     {
         $user->delete();
-        return response()->json([], 204);
+        if ($request->ajax()) {
+            return response()->json([], 204);
+        }
+        return back()->with('success', 'Usuario Eliminado');
     }
 }
