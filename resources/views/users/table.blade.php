@@ -4,9 +4,9 @@
     <div class="container">
         @include('layouts.alerts')
 
-        {{-- <div class="container">
+        <div class="container">
         @include('layouts.alerts')
-        <div class="card">
+        {{-- <div class="card">
             <div class="card-header">
                 <h1 class="text-center">Usuarios</h1>
                 <a href="{{ route('show.create.user') }}" class="btn btn-success">Crear nuevo Usuario</a>
@@ -47,8 +47,8 @@
                     </table>
                 </section>
             </div>
-        </div>
-    </div> --}}
-    <table-user :users="{{$users}}"></table-user>
+        </div> --}}
+        <table-user :users_data="{{$users}}"></table-user>
+    </div>
 
 @endsection

@@ -5,11 +5,11 @@
     @include('layouts.alerts')
     <div class="card">
         <div class="card-header">
-            <h1 class="text-center">Tienda Productos</h1>
+            <h1 class="text-center">Home</h1>
         </div>
         <div class="card-body">
             <section class="table-responsive">
-                <table class="table table-striped table-dark">
+                {{-- <table class="table table-striped table-dark">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -35,8 +35,8 @@
                                 </td>
                             </tr>
                         @endforeach --}}
-                    </tbody>
-                </table>
+                    {{-- </tbody>
+                </table>  --}}
             </section>
         </div>
     </div>

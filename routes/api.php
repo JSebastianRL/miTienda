@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -13,6 +14,9 @@ Route::group(['prefix' => 'Users', 'controller' => UserController::class], funct
     Route::delete('/DeleteUser/{user}', 'deleteUser');
 });
 
+Route::group(['prefix'=>'Product', 'controller'=> ProductController::class],function(){
+
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

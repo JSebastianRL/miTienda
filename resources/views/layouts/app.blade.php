@@ -69,13 +69,10 @@
                                         Usuarios
                                     </a>
                                     <a class="dropdown-item" href="{{ route('show.product.table') }}">
-                                        Prodcutos
+                                        Productos
                                     </a>
                                     <a class="dropdown-item" href="{{ route('home') }}">
                                         Home
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('index') }}">
-                                        Edit
                                     </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

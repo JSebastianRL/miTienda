@@ -50,7 +50,7 @@ class UserController extends Controller
         }
         return back()->with('success', 'Usuario Actualizado');
     }
-    public function deleteUser( $user, Request $request)
+    public function deleteUser( User $user, Request $request)
     {
         $user->delete();
         if ($request->ajax()) {
