@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function showCreateProducts()
     {
         $categories = Category::get();
-        return view('products.create-product', compact('categories'));
+        return view('products.table-product', compact('categories'));
     }
 
     public function showUpdateProducts(Product $product)

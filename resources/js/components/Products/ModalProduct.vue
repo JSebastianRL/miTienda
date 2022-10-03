@@ -25,14 +25,16 @@
                         @submit.prevent="storeProduct"
                         enctype="multipart/form-data"
                     >
-                        <!-- <div class="mb-3">
-                        <label for="">Categoria</label>
-                        <select name="category_id" class="form-control">
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }} ">{{ $category->nombre }}</option>
-                            @endforeach
-                        </select>
-                        </div> -->
+                        <div class="mb-3">
+                                    <label for="">Categoria</label>
+                                    <!-- v-model="products.category_id" -->
+                                    <select name="category" id="category" class="form-control" >
+                                        <option value="1">Teclado</option>
+                                        <option value="2">Monitor</option>
+                                        <option value="3">Mause</option>
+                                        <option value="4">Audifonos</option>
+                                    </select>
+                                </div>
                         <div class="mb-3">
                             <label for="imagen_product_file" class="form-label"
                                 >Imagen</label

@@ -57,7 +57,7 @@
 
                                 @if (Route::has('register'))
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">Carrito</a>
+                                        <a class="nav-link" href="{{ route('carrito') }}">Carrito</a>
                                     </li>
                                 @endif
                             </div>

@@ -50,6 +50,5 @@
             </div>
         </div> --}}
         <table-product :products_data="{{$products}}"></table-product>
-
     </div>
 @endsection

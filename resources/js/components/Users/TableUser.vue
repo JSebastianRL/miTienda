@@ -24,7 +24,7 @@
                                     <button
                                         class="btn btn-warning me-3"
                                         type="button"
-                                        @click="editUser(user)"
+                                        @click="editUser()"
                                     >
                                         Editar
                                     </button>
@@ -58,7 +58,12 @@ export default {
     data() {
         return {
             users: [],
+            load_model: false,
+            modal: null,
         };
+    },
+    created() {
+        this.index();
     },
     mounted() {
         $("#UserTable").DataTable();
@@ -67,7 +72,7 @@ export default {
         async index() {
             this.users = [...this.users_data];
         },
-        editUser(user) {
+        editUser(user_id) {
             this.openModal();
         },
         openModal() {

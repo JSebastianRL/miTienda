@@ -33,8 +33,7 @@
                                 <img
                                     :src="`/storage/app/public/images/${product.imagen_product}`"
                                     alt="imagen_product"
-                                    width="30"
-                                />
+                                    width="30"/>
                             </td>
                             <td>{{ product.precio }}</td>
                             <td>{{ product.stock }}</td>
@@ -71,6 +70,7 @@
 <script>
 // import ModalProduct from '@/components/Products/ModalProduct.vue'
 import ModalProduct from "./ModalProduct.vue";
+import axios from "axios";
 export default {
     props: ["products_data"],
     components: {
@@ -81,7 +81,7 @@ export default {
             products: [],
             product: null,
             load_model: false,
-            modal:null
+            modal: null,
         };
     },
     created() {
@@ -99,19 +99,29 @@ export default {
             this.product = null;
             this.openModal();
         },
-        editProduct(product_id) {
+        async editProduct(product_id) {
+            const { data } = await axios.get(
+                "/Product/showProductTable/${product_id}"
+            );
+            this.product = data;
             this.openModal();
         },
         openModal() {
             this.load_model = true;
-            this.modal = new bootstrap.Modal(document.getElementById("productModal"),{Keyboard: false,});
+            this.modal = new bootstrap.Modal(
+                document.getElementById("productModal"),
+                { Keyboard: false }
+            );
             this.modal.show();
             const modal = document.getElementById("productModal");
-            modal.addEventListener("hidden.bs.modal", () => (this.load_model = false));
+            modal.addEventListener(
+                "hidden.bs.modal",
+                () => (this.load_model = false)
+            );
         },
-        closeModal(){
-            this.modal.hide()
-        }
+        closeModal() {
+            this.modal.hide();
+        },
     },
 };
 </script>

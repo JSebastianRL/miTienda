@@ -17,17 +17,38 @@ class ProductSeeder extends Seeder
 	{
 		DB::table('products')->insert([
 			'category_id'=> 1,
-			'nombre'=>'lg',
-			'precio'=>400,
+			'nombre'=>'Corsair',
+			'precio'=>400000,
 			'stock'=>'SI',
-			'descripcion'=>'Monitor grande',
+			'descripcion'=>'Teclado ergonomico y facil de usar',
+		]);
+		DB::table('products')->insert([
+			'category_id'=> 2,
+			'nombre'=>'Lg',
+			'precio'=>450000,
+			'stock'=>'SI',
+			'descripcion'=>'Buen producto, gran calidad de imagen y muy buenos colores',
 		]);
 		DB::table('products')->insert([
 			'category_id'=> 3,
-			'nombre'=>'corsair',
+			'nombre'=>'VSG',
 			'precio'=>450000,
+			'stock'=>'SI',
+			'descripcion'=>'Un mause increible, comodo y larga duracion de la bateria',
+		]);
+		DB::table('products')->insert([
+			'category_id'=> 1,
+			'nombre'=>'Red Dragon',
+			'precio'=>120000,
 			'stock'=>'NO',
-			'descripcion'=>'Buen producto',
+			'descripcion'=>'Buen producto, las teclas son comodas aunque un poco ruidoso',
+		]);
+		DB::table('products')->insert([
+			'category_id'=> 4,
+			'nombre'=>'corsair',
+			'precio'=>750000,
+			'stock'=>'NO',
+			'descripcion'=>'Buen producto, gran calidad de audio',
 		]);
 	}
 }

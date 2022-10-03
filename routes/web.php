@@ -1,19 +1,33 @@
 <?php
 
+use App\Models\User;
 use League\Flysystem\PathPrefixer;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CarritoController;
 
 Auth::routes();
 
 Route::get('/', [IndexController::class, 'showProductCardIndex'])->name('index');
 
-Route::group(['prefix' => 'Users', 'controller' => UserController::class], function () {
+// Route::get('/test', function () {
 
+//     $person = Person::find(6);
+//     $person->assignRole('admin');
+//     $person = Person::find(7);
+//     $person->assignRole('person');
+//     $person = Person::find(8);
+//     $person->assignRole('foreign');
+//     dd($person->toArray());
+//     $role = Role::create(['name' => 'person']);
+//     return $role;
+// });
+
+Route::group(['prefix' => 'Users', 'controller' => UserController::class], function () {
 
     Route::get('/','showUserTable')->name('show.user.table');
     Route::get('/CreateUser','showCreateUsers')->name('show.create.user');
@@ -36,4 +50,5 @@ Route::group(['prefix' => 'Product', 'controller' => ProductController::class], 
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'showProductCardHome'])->name('home');
+Route::get('/carrito', [App\Http\Controllers\CarritoController::class, 'showProductCardCarrito'])->name('carrito');
 // Route::get('/Product/', [CategoryController::class, 'showCreateModalProducts'])->name('home');
