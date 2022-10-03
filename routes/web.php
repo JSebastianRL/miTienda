@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 Auth::routes();
 
@@ -35,3 +36,4 @@ Route::group(['prefix' => 'Product', 'controller' => ProductController::class], 
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'showProductCardHome'])->name('home');
+// Route::get('/Product/', [CategoryController::class, 'showCreateModalProducts'])->name('home');

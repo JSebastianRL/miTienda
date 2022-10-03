@@ -21,7 +21,7 @@ class UserRequest extends FormRequest
 
         //creacion
         if ($this->method('POST')) {
-            $rules['password'] = ['required', 'string', 'min:6', 'confirmed'];
+            $rules['password'] = ['required', 'string', 'min:8', 'confirmed'];
         } else {
             //edicion
             $rules['password'] = ['confirmed'];

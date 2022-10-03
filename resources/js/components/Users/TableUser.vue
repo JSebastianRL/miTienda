@@ -41,31 +41,51 @@
                     </tbody>
                 </table>
             </section>
+            <div v-if="load_model">
+                <modal-user :user="user"></modal-user>
+            </div>
         </div>
     </section>
 </template>
 
 <script>
+import ModalUser from "./ModalUser.vue";
 export default {
-    props: ['users_data'],
-
+    props: ["users_data"],
+    components: {
+        ModalUser,
+    },
     data() {
         return {
             users: [],
         };
     },
-    created() {
-        this.index()
-    },
-     mounted() {
-        $('#UserTable').DataTable();
+    mounted() {
+        $("#UserTable").DataTable();
     },
     methods: {
         async index() {
             this.users = [...this.users_data];
         },
-        editUser(user) {},
-        deleteUser(user_id) {},
+        editUser(user) {
+            this.openModal();
+        },
+        openModal() {
+            this.load_model = true;
+            this.modal = new bootstrap.Modal(
+                document.getElementById("userModal"),
+                { Keyboard: false }
+            );
+            this.modal.show();
+            const modal = document.getElementById("userModal");
+            modal.addEventListener(
+                "hidden.bs.modal",
+                () => (this.load_model = false)
+            );
+        },
+        closeModal() {
+            this.modal.hide();
+        },
     },
 };
 </script>

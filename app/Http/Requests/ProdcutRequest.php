@@ -15,6 +15,8 @@ class ProdcutRequest extends FormRequest
     public function rules()
     {
         $rules = [
+            'id'=>['required'],
+            'img_file' => ['image','nullable'],
             'nombre' => ['required', 'string'],
             'precio' => ['required', 'integer'],
             'stock' => ['required', 'string'],

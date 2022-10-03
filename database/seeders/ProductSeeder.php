@@ -22,5 +22,12 @@ class ProductSeeder extends Seeder
 			'stock'=>'SI',
 			'descripcion'=>'Monitor grande',
 		]);
+		DB::table('products')->insert([
+			'category_id'=> 3,
+			'nombre'=>'corsair',
+			'precio'=>450000,
+			'stock'=>'NO',
+			'descripcion'=>'Buen producto',
+		]);
 	}
 }
