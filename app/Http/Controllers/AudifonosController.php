@@ -5,12 +5,12 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class AudifonosController extends Controller
 {
-function showProductCardIndex()
+function showProductCardAudifonos()
     {
-        $products = Product::get();
-        return view('index', compact('products'));
+        $products = Product::where('category_id','4')->get();
+        return view('audifonos', compact('products'));
     }
     public function getCategories()
     {

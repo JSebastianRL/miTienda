@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProdcutRequest extends FormRequest
@@ -15,8 +16,8 @@ class ProdcutRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'id'=>['required'],
-            'img_file' => ['image','nullable'],
+            'category_id'=> ['required'],
+            'imagenProduct' => ['image','nullable'],
             'nombre' => ['required', 'string'],
             'precio' => ['required', 'integer'],
             'stock' => ['required', 'string'],
@@ -24,7 +25,7 @@ class ProdcutRequest extends FormRequest
         ];
 
         //creacion
-        if ($this->method('POST')) {
+        if ($this->method('post')) {
             $rules['category_id'] = ['required', 'integer'];
         } else {
             //edicion

@@ -11,4 +11,10 @@ class CategoryController extends Controller
         $categories = Category::get();
         return view('products.table-product', compact('categories'));
     }
+
+    public function getCategories()
+    {
+        return response()->json(['categories' => Category::all()]);
+    }
 }
+

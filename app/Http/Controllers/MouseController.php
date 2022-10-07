@@ -5,12 +5,12 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class MouseController extends Controller
 {
-function showProductCardIndex()
+function showProductCardMouse()
     {
-        $products = Product::get();
-        return view('index', compact('products'));
+        $products = Product::where('category_id','3')->get();
+        return view('mouse', compact('products'));
     }
     public function getCategories()
     {

@@ -31,8 +31,5 @@ class User extends Authenticatable
         $this->attributes['password']= bcrypt($value) ;
     }
 
-    public function Products()
-    {
-        return $this->hasMany(Product::class, 'user_id', 'id');
-    }
+
 }

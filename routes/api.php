@@ -15,6 +15,11 @@ Route::group(['prefix' => 'Users', 'controller' => UserController::class], funct
 });
 
 Route::group(['prefix'=>'Product', 'controller'=> ProductController::class],function(){
+    Route::get('/GetAllProduct', 'getAllProduct');
+    Route::get('/GetProductById/{id}', 'getProductById');
+    Route::post('/SaveProduct', 'saveProduct');
+    Route::put('/UpdateProduct/{Product}', 'updateProduct');
+    Route::delete('/DeleteProduct/{Product}', 'deleteProduct');
 
 });
 

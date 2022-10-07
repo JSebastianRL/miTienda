@@ -30,21 +30,23 @@ class ProductSeeder extends Seeder
 			'descripcion'=>'Buen producto, gran calidad de imagen y muy buenos colores',
 		]);
 		DB::table('products')->insert([
-			'category_id'=> 3,
+            'category_id'=> 3,
 			'nombre'=>'VSG',
 			'precio'=>450000,
 			'stock'=>'SI',
 			'descripcion'=>'Un mause increible, comodo y larga duracion de la bateria',
 		]);
 		DB::table('products')->insert([
-			'category_id'=> 1,
+            'category_id'=> 1,
+            'imagenProduct'=> 'Teclado.jpg',
 			'nombre'=>'Red Dragon',
 			'precio'=>120000,
 			'stock'=>'NO',
 			'descripcion'=>'Buen producto, las teclas son comodas aunque un poco ruidoso',
 		]);
 		DB::table('products')->insert([
-			'category_id'=> 4,
+            'category_id'=> 4,
+            'imagenProduct'=> 'audifonos.jpg',
 			'nombre'=>'corsair',
 			'precio'=>750000,
 			'stock'=>'NO',

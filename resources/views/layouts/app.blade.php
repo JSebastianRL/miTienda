@@ -22,9 +22,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                {{-- <a class="navbar-brand" href="{{ url('home') }}">
                     {{ config('app.name', 'Laravel') }}
-                </a>
+                </a> --}}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -35,44 +35,58 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
 
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
+                            @if (Route::has('registerForm'))
+                                <a class="navbar-brand" href="{{ url('/') }}">
+                                    {{ config('app.name', 'Laravel') }}
+                                </a>
+                            @endif
+                            @if (Route::has('loginForm'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">Iniciar seción</a>
+                                    <a class="nav-link" href="{{ route('loginForm') }}">Iniciar seción</a>
                                 </li>
                             @endif
-
-                            @if (Route::has('register'))
+                            @if (Route::has('registerForm'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                                    <a class="nav-link" href="{{ route('registerForm') }}">Register</a>
                                 </li>
                             @endif
                         @else
-                            <div >
-
-                                @if (Route::has('register'))
+                            @if (Route::has('register'))
+                                <div class="ms-auto">
+                                    <a class="navbar-brand" href="{{ url('/home') }}">
+                                        {{ config('app.name', 'Laravel') }}
+                                    </a>
+                                </div>
+                            @endif
+                            @if (Route::has('register'))
+                                <div class="ms-auto">
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('carrito') }}">Carrito</a>
                                     </li>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @role('admin')
                                     <a class="dropdown-item" href="{{ route('show.user.table') }}">
                                         Usuarios
                                     </a>
                                     <a class="dropdown-item" href="{{ route('show.product.table') }}">
                                         Productos
                                     </a>
+                                    @endrole
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">

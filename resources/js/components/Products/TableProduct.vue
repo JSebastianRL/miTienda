@@ -10,8 +10,8 @@
             >
         </div>
         <div class="card-body">
-            <section class="table-responsive">
-                <table id="productTable" class="table table-striped table-dark">
+            <section class="table-responsive d-flex justify-content-between">
+                <table id="productTable" class="table table-striped">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -31,9 +31,10 @@
                             <td>{{ product.nombre }}</td>
                             <td>
                                 <img
-                                    :src="`/storage/app/public/images/${product.imagen_product}`"
-                                    alt="imagen_product"
-                                    width="30"/>
+                                    :src="`/storage/images/${product.imagenProduct}`"
+                                    alt="imagenProduct"
+                                    class="img-fluid w-50"
+                                />
                             </td>
                             <td>{{ product.precio }}</td>
                             <td>{{ product.stock }}</td>
@@ -43,14 +44,14 @@
                                     <button
                                         class="btn btn-warning me-3"
                                         type="button"
-                                        @click="createProduct()"
+                                        @click="getProduct(product.id)"
                                     >
                                         Editar
                                     </button>
                                     <button
                                         class="btn btn-danger"
                                         type="button"
-                                        @click="editProduct(product.id)"
+                                        @click="deleteProduct(product.id)"
                                     >
                                         Eliminar
                                     </button>
@@ -60,7 +61,7 @@
                     </tbody>
                 </table>
             </section>
-            <div v-if="load_model">
+            <div>
                 <modal-product :product="product"></modal-product>
             </div>
         </div>
@@ -68,9 +69,7 @@
 </template>
 
 <script>
-// import ModalProduct from '@/components/Products/ModalProduct.vue'
-import ModalProduct from "./ModalProduct.vue";
-import axios from "axios";
+import ModalProduct from "@/components/Products/ModalProduct.vue";
 export default {
     props: ["products_data"],
     components: {
@@ -79,9 +78,10 @@ export default {
     data() {
         return {
             products: [],
-            product: null,
-            load_model: false,
-            modal: null,
+            product: {
+                category_id: null,
+            },
+            load_modal: false,
         };
     },
     created() {
@@ -90,34 +90,30 @@ export default {
     mounted() {
         $("#productTable").DataTable();
     },
-
     methods: {
         async index() {
             this.products = [...this.products_data];
         },
         createProduct() {
-            this.product = null;
             this.openModal();
         },
-        async editProduct(product_id) {
-            const { data } = await axios.get(
-                "/Product/showProductTable/${product_id}"
-            );
-            this.product = data;
+        async getProduct(product_id) {
+            let { data } = await axios.get(`/Product/getProduct/${product_id}`);
+            this.product = data.product;
             this.openModal();
         },
         openModal() {
-            this.load_model = true;
-            this.modal = new bootstrap.Modal(
-                document.getElementById("productModal"),
-                { Keyboard: false }
-            );
-            this.modal.show();
-            const modal = document.getElementById("productModal");
-            modal.addEventListener(
-                "hidden.bs.modal",
-                () => (this.load_model = false)
-            );
+            this.load_modal = true;
+            setTimeout(() => {
+                let modal = new bootstrap.Modal(
+                    document.getElementById("productModal"),
+                    {
+                        Keyboard: false,
+                    }
+                );
+                modal.show();
+                console.log(modal);
+            }, 50);
         },
         closeModal() {
             this.modal.hide();

@@ -1,18 +1,16 @@
 import "./bootstrap";
 import { createApp } from "vue";
 import TableUser from './components/Users/TableUser.vue'
-import ExampleComponent from './components/ExampleComponent.vue'
 import TableProduct from './components/Products/TableProduct.vue'
-import CardProduct from './components/Products/CardProduct.vue'
-
+import CardProductHome from './components/Products/CardProductHome.vue'
+import CardProductIndex from './components/Products/CardProductIndex.vue'
 
 const app = createApp({
     components:{
-        CardProduct,
+        CardProductHome,
         TableUser,
-        ExampleComponent,
         TableProduct,
-        TableUser
+        CardProductIndex
     }
 });
 

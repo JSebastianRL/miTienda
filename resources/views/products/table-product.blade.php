@@ -6,7 +6,7 @@
 
         {{-- <div class="card">
             <div class="card-header">
-                <h1 class="text-center">Prodcutos</h1>
+                <h1 class="text-center">Productos</h1>
                 <a href="{{ route('show.create.product') }}" class="btn btn-success">Crear nuevo producto</a>
             </div>
             <div class="card-body">

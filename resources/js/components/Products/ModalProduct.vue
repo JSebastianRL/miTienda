@@ -8,11 +8,11 @@
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
     >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        {{ status }}
+                        {{ status }} producto
                     </h5>
                     <button
                         type="button"
@@ -22,32 +22,59 @@
                 </div>
                 <div class="modal-body">
                     <form
-                        @submit.prevent="storeProduct"
+                        @submit.prevent="saveProduct"
                         enctype="multipart/form-data"
                     >
-                        <div class="mb-3">
-                                    <label for="">Categoria</label>
-                                    <!-- v-model="products.category_id" -->
-                                    <select name="category" id="category" class="form-control" >
-                                        <option value="1">Teclado</option>
-                                        <option value="2">Monitor</option>
-                                        <option value="3">Mause</option>
-                                        <option value="4">Audifonos</option>
-                                    </select>
-                                </div>
-                        <div class="mb-3">
-                            <label for="imagen_product_file" class="form-label"
-                                >Imagen</label
-                            >
-                            <input
-                                type="file"
-                                class="form-control"
-                                id="imagen_product_file"
-                                name="imagen_product_file"
+                        <div class="container mb-3">
+                            <div class="mb-3">
+                                <label for="category_id" class="form-lable"
+                                    >Categoria</label
+                                >
+                                <select
+                                    class="form-control"
+                                    name="category"
+                                    id="category"
+                                    v-model="product.category_id"
+                                    required=""
+                                >
+                                    <option value="1">Teclado</option>
+                                    <option value="2">Monitor</option>
+                                    <option value="3">Mause</option>
+                                    <option value="4">Audifonos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div
+                            class="mb-3 d-flex flex-column justify-content-center align-items-center"
+                        >
+                                <label for="imagenProduct" class="form-lable"
+                                    >Imagen</label
+                                >
+                            <img
+                                class="img-fluid"
+                                :src="`${product.imagenProduct}`"
+                                alt=""
+                                v-if="product.imagenProduct"
                             />
+                            <img
+                                class="img-fluid"
+                                :src="`/storage/images/${product.imagenProduct}`"
+                                alt=""
+                                v-else
+                            />
+                            <div>
+                                <input
+                                    type="file"
+                                    class="form-control"
+                                    id="imagenProduct"
+                                    name="imagenProduct"
+                                    v-on:change="previewFile"
+                                    required=""
+                                />
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="nombre" class="form-label"
+                            <label for="nombre" class="form-lable"
                                 >Nombre</label
                             >
                             <input
@@ -55,10 +82,13 @@
                                 class="form-control"
                                 id="nombre"
                                 name="nombre"
+                                placeholder="Digite el nombre del producto"
+                                v-model="product.nombre"
+                                required=""
                             />
                         </div>
                         <div class="mb-3">
-                            <label for="precio" class="form-label"
+                            <label for="precio" class="form-lable"
                                 >Precio</label
                             >
                             <input
@@ -66,26 +96,35 @@
                                 class="form-control"
                                 id="precio"
                                 name="precio"
+                                placeholder="Digite precio del producto"
+                                v-model="product.precio"
+                                required=""
                             />
                         </div>
                         <div class="mb-3">
-                            <label for="stock" class="form-label">Stock</label>
+                            <label for="stock" class="form-lable">Stock</label>
                             <input
                                 type="text"
                                 class="form-control"
                                 id="stock"
                                 name="stock"
+                                placeholder="Digite si hay o no hay stock del producto"
+                                v-model="product.stock"
+                                required=""
                             />
                         </div>
                         <div class="mb-3">
-                            <label for="descripcion" class="form-label"
+                            <label for="descripcion" class="form-lable"
                                 >Descipción</label
                             >
-                            <input
+                            <textarea
                                 type="text"
                                 class="form-control"
                                 id="descripcion"
                                 name="descripcion"
+                                placeholder="Digite una descripcion del producto"
+                                v-model="product.descripcion"
+                                required=""
                             />
                         </div>
                         <div>
@@ -112,7 +151,8 @@ export default {
     props: ["product"],
     data() {
         return {
-            status: "Crear ",
+            file: "",
+            status: "Crear",
         };
     },
     created() {
@@ -122,9 +162,44 @@ export default {
         async index() {
             this.validateUsage();
         },
+        formData() {
+            const form_data = new FormData();
+            form_data.append("category_id", this.product.category_id);
+            form_data.append("imagenProduct", this.file, this.file.name);
+            form_data.append("nombre", this.product.nombre);
+            form_data.append("precio", this.product.precio);
+            form_data.append("stock", this.product.stock);
+            form_data.append("descripcion", this.product.descripcion);
+            return form_data;
+        },
+        async saveProduct() {
+            if (this.status == "Editar") {
+                this.editProduct();
+                return false;
+            }
+            let form_data = this.formData();
+            let { data } = await axios.post(`/Product/Create/`, form_data);
+            this.product = data.newProduct;
+            alert("Producto creado correctamente");
+        },
+        async editProduct() {
+            let form_data = this.formData();
+            let { data } = await axios.put(
+                `/Product/Update/${this.product.id}`,
+                form_data
+            );
+            this.product = data.updateProduct;
+            alert("Producto guardado correctamente");
+        },
         validateUsage() {
-            if (this.product) this.status = "Editar ";
+            console.log(this.product);
+            if (this.product.nombre) this.status = "Editar";
             else this.status = "Crear";
+        },
+        previewFile(event) {
+            this.file = event.target.files[0];
+            this.product.imagenProduct = URL.createObjectURL(this.file);
+            this.showPreviw = true;
         },
     },
 };

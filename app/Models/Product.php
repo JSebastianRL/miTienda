@@ -13,18 +13,14 @@ class Product extends Model
 	use HasFactory, SoftDeletes;
 	protected $fillable = [
         'category_id',
+		'imagenProduct',
 		'nombre',
-		'imagen_product_file',
 		'precio',
 		'stock',
 		'descripcion',
 	];
-	// public function User()
-	// {
-	// 	return $this->belongsTo(User::class, 'user_id', 'id');
-	// }
-	public function Category()
+	public function category()
 	{
-		return $this->belongsTo(Category::class, 'category_id', 'id');
+		return $this->hasOne(Category::class);
 	}
 }
